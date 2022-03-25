@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PointerComponent } from './pointer.component';
+import { PointersListComponent } from './pointers-list.component';
 
 describe('PointerComponent', () => {
-  let component: PointerComponent;
-  let fixture: ComponentFixture<PointerComponent>;
+  let component: PointersListComponent;
+  let fixture: ComponentFixture<PointersListComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PointerComponent ]
+      declarations: [ PointersListComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PointerComponent);
+    fixture = TestBed.createComponent(PointersListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -9,13 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MaterialModule} from "../material.module";
 import {FormsModule} from "@angular/forms";
 import {SafePipeModule} from "safe-pipe";
-import { PointerComponent } from './pointer/pointer.component';
+import { PointersListComponent } from './pointer/pointers-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormulaireApiComponent,
-    PointerComponent
+    PointersListComponent
   ],
   imports: [
     BrowserModule,

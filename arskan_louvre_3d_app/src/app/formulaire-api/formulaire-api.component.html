@@ -37,6 +37,6 @@
           width="600"
           height="600"
           [src]="this.arskanUrl+this.embedUrl | safe: 'resourceUrl'"></iframe>
-  <!--<app-pointer-list [dataSourcePointers]="pointersList"></app-pointer-list>
--->
+
+  <app-pointer-list [objectId]="this.selectedObject._id"></app-pointer-list>
 </div>
