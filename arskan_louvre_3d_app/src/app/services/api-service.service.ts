@@ -4,6 +4,7 @@ import {catchError, throwError} from "rxjs";
 import {Profile} from "../model/profile";
 import {ArskanObject} from "../model/ArskanObject";
 import {EmbedObj} from "../model/embedObj";
+import {Pointer} from "../model/pointer";
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,7 @@ export class ApiServiceService {
         Authorization: 'Bearer ' + this.token,
       })
     }
-    return this.http.get(
+    return this.http.get<Pointer[]>(
       this.url_arskan + this.url_get_object + '/'+objectId + this.url_get_pointers,
       httpOptions
       )

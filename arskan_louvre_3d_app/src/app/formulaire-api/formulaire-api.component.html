@@ -19,13 +19,24 @@
   </mat-form-field>
 </div>
 
-<button type="submit" mat-flat-button color="primary" (click)="showViewer()">Afficher l'objet</button>
+<button type="submit" mat-flat-button color="primary" (click)="showObject()">Afficher l'objet</button>
 
-<div>
-  <iframe *ngIf="this.embedUrl"
+<div *ngIf="this.embedUrl">
+  <div>
+    <mat-form-field appearance="outline" floatLabel="auto">
+      <mat-label for="pointersList">Annotations</mat-label>
+      <mat-select name="pointersList" [(ngModel)]="selectedPointer">
+        <mat-option [value]="p" *ngFor="let p of pointersList">{{p.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <iframe
           id="iFrameViewer"
           title="Inline Frame Example"
           width="600"
           height="600"
           [src]="this.arskanUrl+this.embedUrl | safe: 'resourceUrl'"></iframe>
+  <!--<app-pointer-list [dataSourcePointers]="pointersList"></app-pointer-list>
+-->
 </div>
