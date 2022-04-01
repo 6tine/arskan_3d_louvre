@@ -1,34 +1,106 @@
-<table mat-table [dataSource]="dataSourcePointers" class="mat-elevation-z8">
+<table mat-table multiTemplateDataRows [dataSource]="dataSourcePointers" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- Position Column -->
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef> Id </th>
     <td mat-cell *matCellDef="let element"> {{element.id}} </td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="title">
     <th mat-header-cell *matHeaderCellDef> Title </th>
-    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    <td mat-cell *matCellDef="let element">
+      <input *ngIf="element.isCurrentlyUpdated" [(ngModel)]="element.title">
+      <p *ngIf="!element.isCurrentlyUpdated">{{element.title}}</p>
+    </td>
+
   </ng-container>
 
-  <!-- Weight Column -->
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef> Description </th>
-    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    <td mat-cell *matCellDef="let element">
+      <input *ngIf="element.isCurrentlyUpdated" [(ngModel)]="element.description" >
+      <p *ngIf="!element.isCurrentlyUpdated">
+        {{element.description}}
+      </p>
+    </td>
   </ng-container>
 
-  <!-- Symbol Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Position </th>
-    <td mat-cell *matCellDef="let element"> x: {{element.position['x']}}
-      <br> y: {{element.position['y']}}
-    <br> z: {{element.position['z']}}</td>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.isCurrentlyUpdated">
+        x: <input [(ngModel)]="element.position['x']">
+        <br> y: <input [(ngModel)]="element.position['y']">
+        <br> z: <input [(ngModel)]="element.position['z']">
+      </div>
+      <div *ngIf="!element.isCurrentlyUpdated">
+        x: {{element.position['x']}}
+        <br> y: {{element.position['y']}}
+        <br> z: {{element.position['z']}}
+      </div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="camera">
+    <th mat-header-cell *matHeaderCellDef> Camera </th>
+    <td mat-cell *matCellDef="let element">
+      <div *ngIf="element.isCurrentlyUpdated">
+        <div>
+          Position
+          <br> x: <input [(ngModel)]="element.camera.position[0]">
+          <br> y: <input [(ngModel)]="element.camera.position[1]">
+          <br> z: <input [(ngModel)]="element.camera.position[2]">
+        </div>
+        <div>
+          Target
+          <br> x: <input [(ngModel)]="element.camera.target[0]">
+          <br> y: <input [(ngModel)]="element.camera.target[1]">
+          <br> z: <input [(ngModel)]="element.camera.target[2]">
+        </div>
+      </div>
+      <div *ngIf="!element.isCurrentlyUpdated">
+        <div>
+          Position
+          <br> x: {{element.camera.position[0]}}
+          <br> y: {{element.camera.position[1]}}
+          <br> z: {{element.camera.position[2]}}
+        </div>
+        <div>
+          Target
+          <br> x: {{element.camera.target[0]}}
+          <br> y: {{element.camera.target[1]}}
+          <br> z: {{element.camera.target[2]}}
+        </div>
+      </div>
+    </td>
+
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Actions </th>
+    <td mat-cell *matCellDef="let element; let nbRow = dataIndex">
+      <button mat-icon-button  color="warn" aria-label="Supprimer" (click)="delete(element, nbRow)">
+        <mat-icon [inline]="false" class="align-middle">cancel</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="!element.isCurrentlyUpdated" aria-label="Modifier" (click)="startUpdate(element)">
+        <mat-icon [inline]="false" class="align-middle">border_color</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id!='pending'" aria-label="Save" (click)="update(element)">
+        <mat-icon [inline]="false" class="align-middle">save</mat-icon>
+      </button>
+      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id=='pending'" aria-label="Save" (click)="add(element)">
+        <mat-icon [inline]="false" class="align-middle">save</mat-icon>
+      </button>
+    </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<button mat-icon-button aria-label="Add">
+  <mat-icon color="primary" [inline]="false" class="align-middle"
+            (click)="addNewRow()">add</mat-icon>
+</button>

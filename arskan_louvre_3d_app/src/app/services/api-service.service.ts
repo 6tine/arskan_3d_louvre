@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse, HttpHeaders, HttpParams} from "@angular/common/http";
-import {catchError, throwError} from "rxjs";
+import {catchError, Subject, throwError} from "rxjs";
 import {Profile} from "../model/profile";
 import {ArskanObject} from "../model/ArskanObject";
 import {EmbedObj} from "../model/embedObj";
@@ -21,6 +21,12 @@ export class ApiServiceService {
   url_get_profiles : string = '/profiles'
   //object_id: string = "62278d4dcd78795d5ce9b52b"
   token: string = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNlbGluZUBrcmFiYmkuZnIiLCJzaWxvIjoiNjIxNjVmOWFlZjAwZjAyZTEzYzc2ZDdjIiwiaWF0IjoxNjQ2OTA5MzExLCJpc3MiOiJodHRwczovL2FwaS5hcnNrYW4uY29tIn0.ENwjv5bwwtwxOWcGMxJ4CZ-GrhamEfDOMjPmm2Bpdac"
+
+  siloChangedSubject = new Subject<boolean>();
+
+  emitSiloChangedSubject(){
+    this.siloChangedSubject.next(true);
+  }
 
   getAllObjects(){
     const httpOptions = {
@@ -86,6 +92,70 @@ export class ApiServiceService {
         'name' : name,
         'profile': profileId
       }, httpOptions
+    )
+      .pipe(
+        catchError(this.handleError),
+
+      )
+  }
+
+  delete(annotationId: string = ''){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + this.token,
+      })
+    }
+    return this.http.delete(
+      this.url_arskan + this.url_get_pointers +'/' + annotationId,
+       httpOptions
+    )
+      .pipe(
+        catchError(this.handleError),
+
+      )
+  }
+
+  update(pointer: Pointer){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + this.token,
+      })
+    }
+    return this.http.put(
+      this.url_arskan + this.url_get_pointers +'/' + pointer.id,
+      httpOptions
+    )
+      .pipe(
+        catchError(this.handleError),
+
+      )
+  }
+
+  add(objectId : string ='', pointer: Pointer){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + this.token,
+      })
+    }
+    return this.http.post(
+      this.url_arskan + this.url_get_object +'/' + objectId + this.url_get_pointers,
+      {
+        'title': pointer.title,
+        'description': pointer.description,
+        'camera': {
+          'position': pointer.camera.position,
+          'target': pointer.camera.target
+        },
+        'position': {
+          'x':pointer.position['x'],
+          'y':pointer.position['y'],
+          'z':pointer.position['z']
+        }
+      },
+      httpOptions
     )
       .pipe(
         catchError(this.handleError),
