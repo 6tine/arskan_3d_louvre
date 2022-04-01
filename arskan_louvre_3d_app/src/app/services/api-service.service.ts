@@ -123,8 +123,11 @@ export class ApiServiceService {
         Authorization: 'Bearer ' + this.token,
       })
     }
+    const json = this.pointerToJSON(pointer);
     return this.http.put(
       this.url_arskan + this.url_get_pointers +'/' + pointer.id,
+      json
+      ,
       httpOptions
     )
       .pipe(
@@ -140,27 +143,32 @@ export class ApiServiceService {
         Authorization: 'Bearer ' + this.token,
       })
     }
+    const json = this.pointerToJSON(pointer);
     return this.http.post(
       this.url_arskan + this.url_get_object +'/' + objectId + this.url_get_pointers,
-      {
-        'title': pointer.title,
-        'description': pointer.description,
-        'camera': {
-          'position': pointer.camera.position,
-          'target': pointer.camera.target
-        },
-        'position': {
-          'x':pointer.position['x'],
-          'y':pointer.position['y'],
-          'z':pointer.position['z']
-        }
-      },
+      json,
       httpOptions
     )
       .pipe(
         catchError(this.handleError),
 
       )
+  }
+
+  pointerToJSON(pointer: Pointer) {
+    return {
+      'title': pointer.title,
+      'description': pointer.description,
+      'camera': {
+        'position': pointer.camera.position,
+        'target': pointer.camera.target
+      },
+      'position': {
+        'x': pointer.position['x'],
+        'y': pointer.position['y'],
+        'z': pointer.position['z']
+      }
+    }
   }
 
   private handleError(error: HttpErrorResponse){
@@ -176,4 +184,6 @@ export class ApiServiceService {
     // Return an observable with a user-facing error message.
     return throwError(() => new Error('Something bad happened; please try again later.'));
   }
+
+
 }
