@@ -1,34 +1,42 @@
+<section>
+  <div>
+    <mat-form-field appearance="outline" floatLabel="auto">
+      <mat-label for="objectsList">Objet  3D</mat-label>
+      <mat-select name="objectsList" [(ngModel)]="selectedObject">
+        <mat-option
+          [value]="obj"
+          *ngFor="let obj of objectsList">{{obj.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div>
-  <mat-form-field appearance="outline" floatLabel="auto">
-    <mat-label for="objectsList">Objet  3D</mat-label>
-    <mat-select name="objectsList" [(ngModel)]="selectedObject">
-      <mat-option
-        [value]="obj"
-        *ngFor="let obj of objectsList">{{obj.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+  <div>
+    <mat-form-field appearance="outline" floatLabel="auto">
+      <mat-label for="profileList">Profil</mat-label>
+      <mat-select name="profileList" [(ngModel)]="selectedProfile">
+        <mat-option [value]="p" *ngFor="let p of profileList">{{p.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <h2>Informations supplémentaires sur l'objet sélectionné</h2>
+  <div>
+    <p><b>Nom :</b> {{this.selectedObject.name}}</p>
+    <p><b>Description : </b> {{this.selectedObject.description}}</p>
+    <p><b>Id : </b> {{this.selectedObject._id}}</p>
+    <p><b>url : </b> {{this.selectedObject.picture}}</p>
+    <p><b>Id du silo : </b> {{this.selectedObject.silo_id}}</p>
+  </div>
+  <button type="submit" id="btn-show-obj" mat-flat-button color="primary" (click)="showObject()">Afficher l'objet</button>
 
-<div>
-  <mat-form-field appearance="outline" floatLabel="auto">
-    <mat-label for="profileList">Profil</mat-label>
-    <mat-select name="profileList" [(ngModel)]="selectedProfile">
-      <mat-option [value]="p" *ngFor="let p of profileList">{{p.name}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+  <div *ngIf="this.embedUrl">
 
-<button type="submit" id="btn-show-obj" mat-flat-button color="primary" (click)="showObject()">Afficher l'objet</button>
+    <iframe
+      id="iFrameViewer"
+      title="Inline Frame Example"
+      width="600"
+      height="600"
+      [src]="this.arskanUrl+this.embedUrl | safe: 'resourceUrl'"></iframe>
+    <app-pointer-list [objectId]="this.selectedObjId"></app-pointer-list>
+  </div>
 
-<div *ngIf="this.embedUrl">
-
-  <iframe
-          id="iFrameViewer"
-          title="Inline Frame Example"
-          width="600"
-          height="600"
-          [src]="this.arskanUrl+this.embedUrl | safe: 'resourceUrl'"></iframe>
-
-  <app-pointer-list [objectId]="this.selectedObjId"></app-pointer-list>
-</div>
+</section>

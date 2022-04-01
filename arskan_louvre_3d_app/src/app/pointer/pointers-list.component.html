@@ -1,3 +1,4 @@
+<h2>Liste des pointeurs de l'objet sélectionné</h2>
 <table mat-table multiTemplateDataRows [dataSource]="dataSourcePointers" class="mat-elevation-z8">
 
   <!--- Note that these columns can be defined in any order.
@@ -31,14 +32,14 @@
     <th mat-header-cell *matHeaderCellDef> Position </th>
     <td mat-cell *matCellDef="let element">
       <div *ngIf="element.isCurrentlyUpdated">
-        x: <input [(ngModel)]="element.position['x']">
-        <br> y: <input [(ngModel)]="element.position['y']">
-        <br> z: <input [(ngModel)]="element.position['z']">
+        <b>x:</b> <input [(ngModel)]="element.position['x']">
+        <br> <b>y:</b> <input [(ngModel)]="element.position['y']">
+        <br> <b>z:</b> <input [(ngModel)]="element.position['z']">
       </div>
       <div *ngIf="!element.isCurrentlyUpdated">
-        x: {{element.position['x']}}
-        <br> y: {{element.position['y']}}
-        <br> z: {{element.position['z']}}
+        <b>x:</b> {{element.position['x']}}
+        <br> <b>y:</b> {{element.position['y']}}
+        <br> <b>z:</b> {{element.position['z']}}
       </div>
     </td>
   </ng-container>
@@ -49,9 +50,9 @@
       <div *ngIf="element.isCurrentlyUpdated">
         <div>
           Position
-          <br> x: <input [(ngModel)]="element.camera.position[0]">
-          <br> y: <input [(ngModel)]="element.camera.position[1]">
-          <br> z: <input [(ngModel)]="element.camera.position[2]">
+          <br> <b>x:</b> <input [(ngModel)]="element.camera.position[0]">
+          <br> <b>y:</b> <input [(ngModel)]="element.camera.position[1]">
+          <br> <b>z:</b> <input [(ngModel)]="element.camera.position[2]">
         </div>
         <div>
           Target
@@ -81,16 +82,20 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef> Actions </th>
     <td mat-cell *matCellDef="let element; let nbRow = dataIndex">
-      <button mat-icon-button  color="warn" aria-label="Supprimer" (click)="delete(element, nbRow)">
+      <button mat-icon-button color="warn" aria-label="Supprimer"
+              class="center-buttons" (click)="delete(element, nbRow)">
         <mat-icon [inline]="false" class="align-middle">cancel</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="!element.isCurrentlyUpdated" aria-label="Modifier" (click)="startUpdate(element)">
+      <button mat-icon-button *ngIf="!element.isCurrentlyUpdated" aria-label="Modifier"
+              class="center-buttons" (click)="startUpdate(element)">
         <mat-icon [inline]="false" class="align-middle">border_color</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id!='pending'" aria-label="Save" (click)="update(element)">
+      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id!='pending'" aria-label="Save"
+              class="center-buttons" (click)="update(element)">
         <mat-icon [inline]="false" class="align-middle">save</mat-icon>
       </button>
-      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id=='pending'" aria-label="Save" (click)="add(element)">
+      <button mat-icon-button *ngIf="element.isCurrentlyUpdated && element.id=='pending'" aria-label="Save"
+              class="center-buttons" (click)="add(element)">
         <mat-icon [inline]="false" class="align-middle">save</mat-icon>
       </button>
     </td>

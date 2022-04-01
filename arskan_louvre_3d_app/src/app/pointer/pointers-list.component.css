@@ -1,0 +1,27 @@
+table{
+  width: 100%;
+  max-width: 100%;
+}
+
+table td {
+  vertical-align: middle;
+  overflow-wrap: break-word;
+}
+
+table th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+table button mat-icon {
+  margin: auto;
+}
+
+tr.mat-row, tr.mat-footer-row {
+  height: min-content;
+}
+
+.center-buttons{
+  width: fit-content;
+  margin: auto;
+}
