@@ -59,4 +59,15 @@ export class FormulaireApiComponent implements OnInit {
         this.embedUrl = embedObj.url;
       });
   }
+
+  updateObject(obj: ArskanObject){
+    this.apiService.updateObject(obj)
+      .subscribe(value => {
+        this.selectedObject.isCurrentlyUpdated = false;
+      })
+  }
+
+  startUpdate(obj: ArskanObject) {
+    obj.isCurrentlyUpdated = true;
+  }
 }

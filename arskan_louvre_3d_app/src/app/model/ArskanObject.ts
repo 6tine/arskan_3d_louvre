@@ -4,6 +4,7 @@ export class ArskanObject {
   public picture?: string;
   public silo_id?: string;
   public _id?: string;
+  public isCurrentlyUpdated: boolean = false;
 
   constructor(args: any) {
     this.name = args.name;
