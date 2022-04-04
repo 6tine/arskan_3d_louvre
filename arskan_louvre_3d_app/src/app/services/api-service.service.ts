@@ -99,7 +99,7 @@ export class ApiServiceService {
       )
   }
 
-  delete(annotationId: string = ''){
+  deleteAnnotation(annotationId: string = ''){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -116,7 +116,7 @@ export class ApiServiceService {
       )
   }
 
-  update(pointer: Pointer){
+  updateAnnotation(pointer: Pointer){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -136,7 +136,7 @@ export class ApiServiceService {
       )
   }
 
-  add(objectId : string ='', pointer: Pointer){
+  addAnnotation(objectId : string ='', pointer: Pointer){
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-type': 'application/json',
@@ -147,6 +147,26 @@ export class ApiServiceService {
     return this.http.post(
       this.url_arskan + this.url_get_object +'/' + objectId + this.url_get_pointers,
       json,
+      httpOptions
+    )
+      .pipe(
+        catchError(this.handleError),
+
+      )
+  }
+
+  updateObject(obj: ArskanObject){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-type': 'application/json',
+        Authorization: 'Bearer ' + this.token,
+      })
+    }
+    const json = this.objectToJSON(obj);
+    return this.http.put(
+      this.url_arskan + this.url_get_object +'/' + obj._id,
+      json
+      ,
       httpOptions
     )
       .pipe(
@@ -168,6 +188,13 @@ export class ApiServiceService {
         'y': pointer.position['y'],
         'z': pointer.position['z']
       }
+    }
+  }
+
+  objectToJSON(obj: ArskanObject) {
+    return {
+      'title': obj.name,
+      'description': obj.description,
     }
   }
 

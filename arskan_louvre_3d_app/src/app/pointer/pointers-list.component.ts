@@ -32,7 +32,7 @@ export class PointersListComponent implements OnInit {
     this.dataSourcePointers.data.splice(rowNumber,1)
     this.dataSourcePointers.data = this.dataSourcePointers.data;
     if(element.id != 'pending'){
-      this.apiService.delete(element.id).subscribe(
+      this.apiService.deleteAnnotation(element.id).subscribe(
         value => {
           this.emitSiloChanged();
         }
@@ -45,7 +45,7 @@ export class PointersListComponent implements OnInit {
   }
 
   update(pointer: Pointer) {
-    this.apiService.update(pointer)
+    this.apiService.updateAnnotation(pointer)
       .subscribe(value => {
         this.updateAllPointers();
         this.emitSiloChanged();
@@ -63,7 +63,7 @@ export class PointersListComponent implements OnInit {
   }
 
   add(pointer: Pointer){
-    this.apiService.add(this.objectId, pointer).subscribe(
+    this.apiService.addAnnotation(this.objectId, pointer).subscribe(
       value => {
         this.updateAllPointers();
         this.emitSiloChanged();
