@@ -1,1 +1,15 @@
+#container-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2em;
+}
 
+.mat-form-field + .mat-form-field {
+  margin-left: 1em;
+}
+
+#container-iframe {
+  margin-top: 2em;
+}
