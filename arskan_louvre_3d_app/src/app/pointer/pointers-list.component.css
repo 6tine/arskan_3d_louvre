@@ -1,3 +1,4 @@
+/*
 table{
   width: 100%;
   max-width: 100%;
@@ -27,4 +28,44 @@ tr.mat-row, tr.mat-footer-row {
 .center-buttons{
   width: fit-content;
   margin: auto;
+}
+*/
+
+.mat-column-id, .mat-column-title, .mat-column-description, .mat-column-position, .mat-column-camera {
+  padding: 10px;
+}
+
+.mat-column-id {
+  min-width: 100px;
+  max-width: 100px;
+  word-break: break-word;
+  text-align: center;
+}
+
+.mat-column-title {
+  min-width: 120px;
+  max-width: 120px;
+}
+
+.mat-column-description{
+  min-width: 400px;
+  max-width: 400px;
+  word-break: break-word;
+  margin-left: 10px;
+}
+
+.mat-column-position{
+  min-width: 80px;
+  max-width: 190px;
+}
+
+.mat-column-camera{
+  min-width: 80px;
+  max-width: 180px;
+}
+
+#add-button {
+  text-align: center;
+  margin-top: 2em;
+  margin-bottom: 2em;
 }

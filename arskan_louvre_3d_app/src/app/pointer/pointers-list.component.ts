@@ -13,7 +13,7 @@ export class PointersListComponent implements OnInit {
   constructor(private apiService: ApiServiceService) { }
   @Input() objectId: string | undefined;
   dataSourcePointers = new MatTableDataSource<Pointer>();
-  displayedColumns: string[] = ['id', 'title', 'description', 'position','camera', 'actions'];
+  displayedColumns: string[] = ['numero', 'id', 'title', 'description', 'position','camera', 'actions'];
 
   ngOnInit(): void {
     this.updateAllPointers();
