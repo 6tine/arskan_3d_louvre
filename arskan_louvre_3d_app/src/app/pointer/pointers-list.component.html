@@ -27,7 +27,7 @@
     <ng-container matColumnDef="description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
       <td mat-cell *matCellDef="let element">
-        <input *ngIf="element.isCurrentlyUpdated" [(ngModel)]="element.description">
+        <textarea *ngIf="element.isCurrentlyUpdated" [(ngModel)]="element.description" cols="45" rows="3"></textarea>
         <p *ngIf="!element.isCurrentlyUpdated">
           {{element.description}}
         </p>
