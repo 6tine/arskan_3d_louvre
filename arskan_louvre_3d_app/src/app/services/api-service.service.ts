@@ -193,7 +193,7 @@ export class ApiServiceService {
 
   objectToJSON(obj: ArskanObject) {
     return {
-      'title': obj.name,
+      'name': obj.name,
       'description': obj.description,
     }
   }
