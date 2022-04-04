@@ -1,5 +1,6 @@
-<h2>Liste des pointeurs de l'objet sélectionné</h2>
-<table mat-table multiTemplateDataRows [dataSource]="dataSourcePointers" class="mat-elevation-z8">
+<div>
+<h2 style="text-align: center; margin-top: 2em;">Liste des pointeurs de l'objet sélectionné</h2>
+<table mat-table multiTemplateDataRows [dataSource]="dataSourcePointers" class="mat-elevation-z8" style="width: 600px; margin: auto;">
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -63,16 +64,16 @@
       </div>
       <div *ngIf="!element.isCurrentlyUpdated">
         <div>
-          Position
-          <br> x: {{element.camera.position[0]}}
-          <br> y: {{element.camera.position[1]}}
-          <br> z: {{element.camera.position[2]}}
-        </div>
+          <b>Position</b>
+          <br> <b>x:</b> {{element.camera.position[0]}}
+          <br> <b>y:</b> {{element.camera.position[1]}}
+          <br> <b>z:</b> {{element.camera.position[2]}}
+        </div><br/>
         <div>
-          Target
-          <br> x: {{element.camera.target[0]}}
-          <br> y: {{element.camera.target[1]}}
-          <br> z: {{element.camera.target[2]}}
+          <b>Target</b>
+          <br> <b>x:</b> {{element.camera.target[0]}}
+          <br> <b>y:</b> {{element.camera.target[1]}}
+          <br> <b>z:</b> {{element.camera.target[2]}}
         </div>
       </div>
     </td>
@@ -109,3 +110,4 @@
   <mat-icon color="primary" [inline]="false" class="align-middle"
             (click)="addNewRow()">add</mat-icon>
 </button>
+</div>
