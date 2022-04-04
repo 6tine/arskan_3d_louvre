@@ -1,6 +1,6 @@
 <section>
   <div id="container-form">
-    <mat-form-field appearance="outline" floatLabel="auto">
+    <mat-form-field appearance="outline" floatLabel="auto" style="width: 350px">
       <mat-label for="objectsList">Objet  3D</mat-label>
       <mat-select name="objectsList" [(ngModel)]="selectedObject">
         <mat-option
@@ -17,30 +17,70 @@
     </mat-form-field>
   </div>
 
-  <h2>Informations supplémentaires sur l'objet sélectionné</h2>
-  <div *ngIf="!this.selectedObject.isCurrentlyUpdated">
-    <button mat-icon-button aria-label="Modifier"
-            class="center-buttons" (click)="startUpdate(this.selectedObject)">
-      <mat-icon [inline]="false" class="align-middle">border_color</mat-icon>
-    </button>
-    <p><b>Nom :</b> <br>{{this.selectedObject.name}}</p>
-    <p><b>Description : </b> <br>{{this.selectedObject.description}}</p>
-    <p><b>Id : </b> <br>{{this.selectedObject._id}}</p>
-    <p><b>url : </b> <br>{{this.selectedObject.picture}}</p>
-    <p><b>Id du silo : </b> <br>{{this.selectedObject.silo_id}}</p>
+  <div id="container-info">
+    <h2 style="width: 100%">Informations supplémentaires sur l'objet sélectionné</h2>
+
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Nom</mat-label>
+          <input matInput [(ngModel)]="this.selectedObject.name"
+                 [value]="this.selectedObject.name" [readonly]="!this.selectedObject.isCurrentlyUpdated">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 90%; position: absolute; right: 0;">
+          <mat-label>ID</mat-label>
+          <input matInput [value]="this.selectedObject._id" disabled>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="1" rowHeight="200px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>Description</mat-label>
+          <textarea matInput [(ngModel)]="this.selectedObject.description"
+                    [readonly]="!this.selectedObject.isCurrentlyUpdated" style="resize: none; min-height: 150px; max-height: 150px">
+            {{this.selectedObject.description}}
+          </textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-grid-list cols="2" rowHeight="60px">
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%">
+          <mat-label>URL</mat-label>
+          <input matInput [value]="this.selectedObject.picture" disabled>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 90%; position: absolute; right: 0;">
+          <mat-label>ID Silo</mat-label>
+          <input matInput [value]="this.selectedObject.silo_id" disabled>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div style="margin-bottom: 1em">
+      <button mat-mini-fab color="primary" aria-label="Modifier"
+              class="center-buttons" (click)="startUpdate(this.selectedObject)"
+              *ngIf="!this.selectedObject.isCurrentlyUpdated" style="font-size: 18px">
+        <mat-icon [inline]="true">border_color</mat-icon>
+      </button>
+      <button mat-mini-fab color="accent" aria-label="Save"
+              class="center-buttons" (click)="updateObject(this.selectedObject)"
+              *ngIf="this.selectedObject.isCurrentlyUpdated" style="font-size: 18px">
+        <mat-icon [inline]="true" class="align-middle">save</mat-icon>
+      </button>
+    </div>
+    <button type="submit" id="btn-show-obj" mat-flat-button color="primary" (click)="showObject()"
+            style="width: 200px">Afficher l'objet</button>
+
+
+
   </div>
-  <div *ngIf="this.selectedObject.isCurrentlyUpdated">
-    <button mat-icon-button aria-label="Save"
-            class="center-buttons" (click)="updateObject(this.selectedObject)">
-      <mat-icon [inline]="false" class="align-middle">save</mat-icon>
-    </button>
-    <p><b>Nom :</b><br><textarea [(ngModel)]="this.selectedObject.name" rows = "1" cols = "30"></textarea></p>
-    <p><b>Description : </b> <br><textarea [(ngModel)]="this.selectedObject.description" rows = "3" cols = "60"></textarea></p>
-    <p><b>Id : </b> <br>{{this.selectedObject._id}}</p>
-    <p><b>url : </b> <br><textarea [(ngModel)]="this.selectedObject.picture" rows = "5" cols = "120"></textarea></p>
-    <p><b>Id du silo : </b> <br>{{this.selectedObject.silo_id}}</p>
-  </div>
-  <button type="submit" id="btn-show-obj" mat-flat-button color="primary" (click)="showObject()">Afficher l'objet</button>
 
   <div *ngIf="this.embedUrl" id="container-iframe">
     <iframe

@@ -13,3 +13,9 @@
 #container-iframe {
   margin-top: 2em;
 }
+
+#container-info {
+  width: 800px;
+  margin: auto;
+  text-align: center;
+}
