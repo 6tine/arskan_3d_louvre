@@ -24,22 +24,22 @@
             class="center-buttons" (click)="startUpdate(this.selectedObject)">
       <mat-icon [inline]="false" class="align-middle">border_color</mat-icon>
     </button>
-    <p><b>Nom :</b> {{this.selectedObject.name}}</p>
-    <p><b>Description : </b> {{this.selectedObject.description}}</p>
-    <p><b>Id : </b> {{this.selectedObject._id}}</p>
-    <p><b>url : </b> {{this.selectedObject.picture}}</p>
-    <p><b>Id du silo : </b> {{this.selectedObject.silo_id}}</p>
+    <p><b>Nom :</b> <br>{{this.selectedObject.name}}</p>
+    <p><b>Description : </b> <br>{{this.selectedObject.description}}</p>
+    <p><b>Id : </b> <br>{{this.selectedObject._id}}</p>
+    <p><b>url : </b> <br>{{this.selectedObject.picture}}</p>
+    <p><b>Id du silo : </b> <br>{{this.selectedObject.silo_id}}</p>
   </div>
   <div *ngIf="this.selectedObject.isCurrentlyUpdated">
     <button mat-icon-button aria-label="Save"
             class="center-buttons" (click)="updateObject(this.selectedObject)">
       <mat-icon [inline]="false" class="align-middle">save</mat-icon>
     </button>
-    <p><b>Nom :</b><textarea [(ngModel)]="this.selectedObject.name" rows = "1" cols = "30"></textarea></p>
-    <p><b>Description : </b> <textarea [(ngModel)]="this.selectedObject.description" rows = "3" cols = "60"></textarea></p>
-    <p><b>Id : </b> {{this.selectedObject._id}}</p>
-    <p><b>url : </b> <textarea [(ngModel)]="this.selectedObject.picture" rows = "5" cols = "120"></textarea></p>
-    <p><b>Id du silo : </b> {{this.selectedObject.silo_id}}</p>
+    <p><b>Nom :</b><br><textarea [(ngModel)]="this.selectedObject.name" rows = "1" cols = "30"></textarea></p>
+    <p><b>Description : </b> <br><textarea [(ngModel)]="this.selectedObject.description" rows = "3" cols = "60"></textarea></p>
+    <p><b>Id : </b> <br>{{this.selectedObject._id}}</p>
+    <p><b>url : </b> <br><textarea [(ngModel)]="this.selectedObject.picture" rows = "5" cols = "120"></textarea></p>
+    <p><b>Id du silo : </b> <br>{{this.selectedObject.silo_id}}</p>
   </div>
   <button type="submit" id="btn-show-obj" mat-flat-button color="primary" (click)="showObject()">Afficher l'objet</button>
 
